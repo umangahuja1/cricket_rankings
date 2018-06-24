@@ -146,6 +146,15 @@ def Print(data):
 
 
 def rankings():
+    """
+    Diplays cricket rankings based on the input given by users
+
+    Args : None (No arguements are passed into this function)
+
+    Returns : None (No value is returned by this function)
+
+    """
+
     url, tp = URL()
     data = SOUP(url, tp)
     Print(data)
