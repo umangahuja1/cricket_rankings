@@ -1,8 +1,0 @@
-setup.py
-cricket_rankings/__init__.py
-cricket_rankings/rankings.py
-cricket_rankings.egg-info/PKG-INFO
-cricket_rankings.egg-info/SOURCES.txt
-cricket_rankings.egg-info/dependency_links.txt
-cricket_rankings.egg-info/not-zip-safe
-cricket_rankings.egg-info/top_level.txt
