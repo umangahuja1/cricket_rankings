@@ -58,7 +58,7 @@ def Mode():
 
     else:
         print('\nInvalid Input\nTry Again\n')
-        return Choice();
+        return Mode();
 
 
 def Mode2():
@@ -70,7 +70,7 @@ def Mode2():
 
     else:
         print('\nInvalid Input\nTry Again\n')
-        return Choice();
+        return Mode2();
 
 
 def Value():
