@@ -1,11 +1,11 @@
 from setuptools import setup,find_packages
 import cricket_rankings as cr
+import pypandoc
 
 with open('requirements.txt') as f:
     requirements = f.readlines()
 
-with open("README.md", "r") as f:
-    long_description = f.read()
+long_description = pypandoc.convert('README.md', 'rst')
 
 setup(
         name=cr.__name__,
@@ -23,6 +23,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         ),
+        keywords='package cricket cricket-rankings cricket_rankings',
         install_requires=requirements,
         zip_safe=False
 )
