@@ -34,7 +34,7 @@ cr.rankings()
 
 ## Sample Image
 
-![demo1](https://github.com/umangahuja1/cricket_rankings/blob/master/cricket_rankings/demo/demo1.png)
+![demo1](./cricket_rankings/demo/demo1.png)
 
 ## Issues
 
