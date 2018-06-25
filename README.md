@@ -32,10 +32,6 @@ cr.rankings()
 
 ```
 
-## Sample Image
-
-![demo1](./cricket_rankings/demo/demo1.png)
-
 ## Issues
 
 You can report the bugs at the [issue tracker](https://github.com/umangahuja1/cricket_rankings/issues)
