@@ -1,6 +1,7 @@
 # cricket_rankings
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/umangahuja1/cricket_rankings/blob/master/LICENSE)
+[![Downloads](https://pepy.tech/badge/cricket-rankings)](https://pepy.tech/project/cricket-rankings)
 
 This is a simple python package to display cricket rankings of both men and women, teams and players across all the formats.
 
