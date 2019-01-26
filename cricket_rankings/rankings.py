@@ -90,6 +90,7 @@ def URL():
     url = 'https://www.icc-cricket.com/rankings/' + gen + '/' + tp + mode + '/' + val
     header = gen.upper() + ' ' + mode[1:].upper() + ' ' + val.upper()
     print('\n{:<15}  {:<30}\n{:<15}  {:<30}'.format('', tp.upper(), '', header))
+    print()
     return url, tp
 
 
@@ -98,36 +99,54 @@ def SOUP(url, tp):
         res = requests.get(url)
         soup = BeautifulSoup(res.text, 'lxml')
         a = soup.find_all('tr', {'class': 'table-body'})
-        data = {}
+        
+        data = []
 
         for i in a:
-            team = []
-            name = ''
-            rating = ''
-
+            rank = None
+            player = None
+            team = None
+            rating = None
+            
             try:
-                rank = int(i.contents[1].text)
-            except:
-                pass
+                rank = int(i.find('td', {'class':'table-body__cell--position'}).text)
 
-            try:
-                name = i.contents[3].text.replace('\n', '')
-                name = " ".join(name.split())
-                if rank == 1 and tp == 'player-rankings':
-                    name = name[0:-3]
-            except:
-                pass
-
-            try:
-                rating = i.contents[9].text
-            except:
-                if rank == 1:
-                    rating = i.contents[5].text
+                if tp == 'player-rankings':
+                    try:
+                        player = i.find('div', {'class':'name'}).text.strip()
+                        team_name = i.find('div', {'class':'nationality-logo'}).text.strip()
+                    except:
+                        try:
+                            player = i.find('td', {'class':'name'}).text.strip()
+                            team_name = i.find('td', {'class':'nationality-logo'}).text.strip()
+                        except:
+                            pass
                 else:
-                    rating = i.contents[7].text
+                    team_name = i.find('td', {'class':'rankings-table__team'}).text.strip()
 
-            team.extend([name, rating])
-            data[rank] = team
+                rating = i.find('td', {'class':'rating'}).text.strip()
+            
+            except:
+                pass
+
+
+            if tp == 'player-rankings':
+                row = {
+                'rank' : rank, 
+                'name' : player,
+                'team' : team_name,
+                'rating' : rating
+            }
+
+            else:
+                row = {
+                'rank' : rank, 
+                'team' : team_name,
+                'rating' : rating
+                }
+
+
+            data.append(row)
 
         return data
 
@@ -135,13 +154,15 @@ def SOUP(url, tp):
         print("Sorry couldn't find the data right now")
 
 
-def Print(data):
-    print('\nRANKING \t TEAM\t\t\t\tRATING')
-    for i in sorted(data):
-        print('{:<10}       '.format(i), end='')
-        for j in range(len(data[i])):
-            pass;
-            print('{:<26}'.format(data[i][j]), end='     ')
+def Print(data, tp):
+    if tp == 'player-rankings':
+        print('{:<25}{:<25}{:<25}{:<25}'.format('RANKING', 'Name', 'TEAM', 'RATING'))    
+    else:
+        print('{:<25}{:<25}{:<25}'.format('RANKING', 'TEAM', 'RATING'))   
+
+    for row in data[:10]:
+        for key in row.keys():
+            print('{:<25}'.format(row[key]), end='')
         print()
 
 
@@ -157,7 +178,7 @@ def rankings():
 
     url, tp = URL()
     data = SOUP(url, tp)
-    Print(data)
+    Print(data,tp)
 
 
 if __name__ == '__main__':
